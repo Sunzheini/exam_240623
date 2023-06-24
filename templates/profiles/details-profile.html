@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Profile Details Section -->
+
+    <section id="details">
+        <div id="details-wrapper">
+            <h2>Profile Details</h2>
+            <!-- if the user has a profile image -->
+            {% if profile.image_url %}
+            <img id="details-img" src="{{ profile.image_url }}" alt="profile img"/>
+
+            <!-- if the user has NO profile image -->
+            {% else %}
+            <img id="details-img" src="{% static 'images/default.jpg' %}" alt="profile img"/>
+            {% endif %}
+
+            <!-- user's full name -->
+            <p id="details-title">{{ profile.get_full_name }}</p>
+
+            <div id="info-wrapper">
+                <div id="details-description">
+                    <!-- email -->
+                    <p>
+                        {{ profile.email }}
+                    </p>
+                    <!-- age -->
+                    <p>
+                        Age: {{ profile.age }}
+                    </p>
+                    <!-- number of posts -->
+                    <p id="nutrition">
+                        {% if all_fruit_posts %}
+                        Posts: {{ all_fruit_posts }}
+                        {% else %}
+                        Posts: 0
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                <!--Edit and Delete buttons -->
+                <div id="action-buttons">
+                    <a href="{% url 'edit profile' %}" id="edit-btn">Edit</a>
+                    <a href="{% url 'delete profile' %}" id="delete-btn">Delete</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
